@@ -1,3 +1,4 @@
 # spec/spec_helper.rb
 
-require "reservation"
+require 'reservation'
+require 'client'
