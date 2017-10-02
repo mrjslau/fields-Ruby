@@ -1,0 +1,5 @@
+current directory: /Users/marijuslau/Desktop/fields_reservation_ruby/.bundle/ruby/2.4.0/gems/rainbow-2.2.2/ext
+/usr/local/opt/ruby/bin/ruby mkrf_conf.rb
+
+current directory: /Users/marijuslau/Desktop/fields_reservation_ruby/.bundle/ruby/2.4.0/gems/rainbow-2.2.2/ext
+/usr/local/opt/ruby/bin/ruby -rubygems /Users/marijuslau/Desktop/fields_reservation_ruby/.bundle/ruby/2.4.0/gems/rake-12.1.0/exe/rake RUBYARCHDIR=/Users/marijuslau/Desktop/fields_reservation_ruby/.bundle/ruby/2.4.0/extensions/x86_64-darwin-16/2.4.0/rainbow-2.2.2 RUBYLIBDIR=/Users/marijuslau/Desktop/fields_reservation_ruby/.bundle/ruby/2.4.0/extensions/x86_64-darwin-16/2.4.0/rainbow-2.2.2
