@@ -2,12 +2,12 @@
 require 'spec_helper'
 
 describe Reservation do
-  let (:reservation) { Reservation.new }
+  let (:reservation) { Reservation.new client_id }
 
-  describe '#is_completed?' do
+  describe '#is_pending?' do
     context 'given that it is just created' do
-      it 'returns false' do
-        expect(@reservation.is_completed?).to be(false)
+      it 'returns true' do
+        expect(@reservation.status).to be("pending")
       end
     end
   end
