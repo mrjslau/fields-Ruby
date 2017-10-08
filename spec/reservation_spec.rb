@@ -17,6 +17,14 @@ describe Reservation do
         expect(reservation.accept(admin)).to be_instance_of(Invoice)
       end
     end
+  end
 
- end
+  describe '#cancel' do
+    context 'when admin doesn`t approve' do
+      it 'changes reservation status' do
+        reservation.cancel(admin)
+        expect(reservation.status).to eql("canceled")
+      end
+    end
+  end
 end

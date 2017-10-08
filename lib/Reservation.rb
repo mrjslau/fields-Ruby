@@ -19,5 +19,10 @@ class Reservation
        return @invoice
      end
 
+     def cancel(admin_id, status = "canceled")
+       @acceptor = admin_id
+       @status = status
+     end
+
 
 end
