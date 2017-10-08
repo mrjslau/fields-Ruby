@@ -10,11 +10,10 @@ class Field
     @res_count = 0
   end
 
-  def make_reservation(client_id, time)
-    @reservations[@res_count] = Reservation.new(client_id, time)
+  def make_reservation(client, time)
+    @reservations[@res_count] = Reservation.new(client, time)
     ret = "#{@reservations[@res_count].status.to_s}"
     @res_count += 1
-    puts ret
     return ret
 
   end
