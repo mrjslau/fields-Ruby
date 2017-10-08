@@ -2,3 +2,6 @@
 
 require 'reservation'
 require 'field'
+require 'invoice'
+require 'client'
+require 'admin'

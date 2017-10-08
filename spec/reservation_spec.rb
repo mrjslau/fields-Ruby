@@ -1,6 +1,6 @@
 # spec/reservation_spec.rb
 require 'spec_helper'
-
+=begin
 describe Reservation do
   let (:reservation) { Reservation.new client_id }
 
@@ -11,4 +11,7 @@ describe Reservation do
       end
     end
   end
+
+ end
 end
+=end

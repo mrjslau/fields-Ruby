@@ -7,7 +7,7 @@ let (:field) { [Field.new("Anfield"), Field.new("Wembley")] }
 
 desribe "#make_reservation" do
   it "creates a new reservation" do
-    expect(field[0].make_reservation)to be("Your reservation status is pending")
+    expect(@field[0].make_reservation(@client_id, "14:30"))to eql("Your reservation status is pending")
   end
 end
 
