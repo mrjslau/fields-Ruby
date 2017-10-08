@@ -2,13 +2,14 @@
 require 'spec_helper'
 
 describe Field do
+=begin
   before do
     @client_id = "s1510766"
     @field = [Field.new("Anfield"), Field.new("Wembley")]
   end
-
-#let (:client_id) { "c1510766" }
-#let (:field) { [Field.new("Anfield"), Field.new("Wembley")] }
+=end
+let (:client_id) { "c1510766" }
+let (:field) { [Field.new("Anfield"), Field.new("Wembley")] }
 
 describe "#make_reservation" do
   it "creates a new pending reservation" do
