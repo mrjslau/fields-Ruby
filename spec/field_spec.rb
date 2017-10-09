@@ -7,11 +7,17 @@ let (:client) { Client.new("c1510766") }
 let (:field) { [Field.new("Anfield"), Field.new("Wembley")] }
 
 describe "#is_available?" do
-  #context "client inputs time" do
-    it "checks for availability" do
+  context "client inputs free day" do
+    it "informs it is available" do
       expect(field[0].is_available?(10, 15)).to eql(true)
     end
-  #end
+  end
+  context "client inputs free hour" do
+    it "informs it is available" do
+      field[0].make_reservation(client, 10, 12)
+      expect(field[0].is_available?(10, 15)).to eql(true)
+    end
+  end
 end
 
 describe "#make_reservation" do
@@ -24,10 +30,24 @@ describe "#make_reservation" do
     end
   end
 
-  context "given that field is free at that time" do
+  context "given that field is free whole day" do
+    it "marks field at that time as taken" do
+      msg = "taken"
+      field[0].make_reservation(client, 12, 14)
+      expect(field[0].timetable[12][14]).to eql(msg)
+    end
     it "creates a new pending reservation" do
       msg = "pending"
       expect(field[0].make_reservation(client, 12, 14)).to eql(msg)
+    end
+  end
+
+  context "given that field is free at that time" do
+    it "creates a new pending reservation" do
+      msg = "taken"
+      field[0].make_reservation(client, 20, 14)
+      field[0].make_reservation(client, 20, 15)
+      expect(field[0].timetable[20][15]).to eql(msg)
     end
   end
 end

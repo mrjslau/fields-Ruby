@@ -15,9 +15,11 @@ class Field
   def is_available?(day, time)
     if @timetable[day].nil?
       return true
-    elseif @timetable[day].key?(time)
+    elsif @timetable[day].has_key?(time) == false
+      puts "Ce"
       return true
     else
+      puts "ne"
       return false
     end
   end
