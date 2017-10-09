@@ -25,7 +25,7 @@ class Reservation
        @status = status
      end
 
-
-
-
+     def confirm(status = "confirmed and paid")
+       @status = status
+     end
 end

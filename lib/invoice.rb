@@ -11,6 +11,7 @@ class Invoice
 
   def pay(client_id)
     @status = "paid"
+    @reservation.confirm
   end
 
 end
