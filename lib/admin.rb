@@ -1,10 +1,11 @@
 # lib/admin.rb
 
+# Admin class objects hold unique id and
+# information about accounts of administrators
 class Admin
-attr_accessor :id
+  attr_reader :id
 
-def initialize(id)
-  @id = id
-end
-
+  def initialize(id)
+    @id = id
+  end
 end

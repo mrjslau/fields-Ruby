@@ -1,8 +1,9 @@
 # lib/field.rb
 
+# Field class is the main program class
+# it contains fields, which can be reserved by clients
 class Field
-  attr_accessor :name, :reservations, :res_count, :price, :timetable
-  STATUS_MSG = "Your reservation status is: "
+  attr_reader :name, :reservations, :res_count, :price, :timetable
 
   def initialize(name, price = 40)
     @name = name
@@ -12,35 +13,25 @@ class Field
     @timetable = []
   end
 
-  def is_available?(day, time)
-    if @timetable[day].nil?
-      return true
-    elsif @timetable[day].has_key?(time) == false
-      puts "Ce"
-      return true
+  def available?(day, time)
+    sel_day = @timetable[day]
+
+    if sel_day.nil? || sel_day.key?(time) == false
+      true
     else
-      puts "ne"
-      return false
+      false
     end
   end
 
-
   def make_reservation(client, day, time)
-    if !(self.is_available?(day, time))
-      ret = "not available"
-      return ret
-    end
+    return 'not available' unless available?(day, time)
 
-    if @timetable[day].nil?
-      @timetable[day] = Hash.new(time)
-      @timetable[day][time] = "taken"
-    else
-      @timetable[day][time] = "taken"
-    end
+    @timetable[day] = Hash.new(time) if @timetable[day].nil?
+
+    @timetable[day][time] = 'taken'
 
     @reservations[@res_count] = Reservation.new(self, client, day, time)
-    ret = "#{@reservations[@res_count].status.to_s}"
     @res_count += 1
-    return ret
+    @reservations[@res_count - 1].status
   end
 end

@@ -1,17 +1,17 @@
 # lib/invoice.rb
 
+# Invoice class objects are invoices for reservations, which can be paid
 class Invoice
-  attr_accessor :reservation, :status, :amount
+  attr_reader :reservation, :status, :amount
 
-  def initialize(reservation, status = "waiting for payment")
+  def initialize(reservation, status = 'waiting for payment')
     @reservation = reservation
     @status = status
     @amount = reservation.field.price
   end
 
-  def pay(client_id)
-    @status = "paid"
+  def pay
+    @status = 'paid'
     @reservation.confirm
   end
-
 end

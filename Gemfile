@@ -1,6 +1,6 @@
 # Gemfile
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
-gem "rspec"
-gem 'simplecov', :require => false, :group => :test
+gem 'rspec'
 gem 'rubocop-rspec'
+gem 'simplecov', require: false, group: :test
