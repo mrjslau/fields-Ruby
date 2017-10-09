@@ -3,7 +3,7 @@ require 'spec_helper'
 
 describe Invoice do
   let (:client) { Client.new("s1510766") }
-  let (:reservation) { Reservation.new(Field.new("Emirates"), client, "15:30") }
+  let (:reservation) { Reservation.new(Field.new("Emirates"), client, 21, 20) }
   let (:invoice) { Invoice.new(reservation)}
 
   describe '#pay' do

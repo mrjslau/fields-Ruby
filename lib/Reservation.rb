@@ -2,13 +2,14 @@
 
 class Reservation
      @@global_res_id = 1000000
-     attr_accessor :id, :field, :client_id, :time, :status, :acceptor, :invoice
+     attr_accessor :id, :field, :client_id, :day, :time, :status, :acceptor, :invoice
 
-     def initialize(field, client, time, status = "pending")
+     def initialize(field, client, day, time, status = "pending")
        @id = @@global_res_id
        @@global_res_id += 1
        @field = field
        @client_id = client.id
+       @day = day
        @time = time
        @status = status
      end
