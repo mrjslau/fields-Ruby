@@ -16,6 +16,5 @@ class Field
     ret = "#{@reservations[@res_count].status.to_s}"
     @res_count += 1
     return ret
-
   end
 end
