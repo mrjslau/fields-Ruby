@@ -3,12 +3,12 @@
 # Reservation class is responsible for managing reservations placed on fields
 # and assigning id's
 class Reservation
-  @@global_res_id = 100_000
-  attr_reader :id, :field, :client_id, :day, :time, :status, :acceptor, :invoice
+  @@class_instance_res_id = 100_000
+  attr_reader :id, :field, :client_id, :day, :time, :status, :acceptor
 
   def initialize(field, client, day, time, status = 'pending')
-    @id = @@global_res_id
-    @@global_res_id += 1
+    @id = @@class_instance_res_id
+    @@class_instance_res_id = 1
     @field = field
     @client_id = client.id
     @day = day
@@ -19,8 +19,7 @@ class Reservation
   def accept(admin_id, status = 'accepted')
     @acceptor = admin_id
     @status = status
-    @invoice = Invoice.new(self)
-    @invoice
+    Invoice.new(self)
   end
 
   def cancel(admin_id, status = 'canceled')

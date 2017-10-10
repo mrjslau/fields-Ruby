@@ -30,21 +30,18 @@ describe Field do
     end
 
     context 'given that field is free whole day' do
-      it 'marks field at that time as taken' do
-        field[0].make_reservation(client, 12, 14)
-        expect(field[0].timetable[12][14]).to eql('taken')
-      end
       it 'creates a new pending reservation' do
-        expect(field[0].make_reservation(client, 12, 14)).to eql('pending')
+        msg = 'pending'
+        expect(field[0].make_reservation(client, 12, 14).status).to eql(msg)
       end
     end
 
     context 'given that field is free at that time' do
       it 'creates a new pending reservation' do
-        msg = 'taken'
+        msg = 'pending'
         field[0].make_reservation(client, 20, 14)
         field[0].make_reservation(client, 20, 15)
-        expect(field[0].timetable[20][15]).to eql(msg)
+        expect(field[0].timetable[20][15].status).to eql(msg)
       end
     end
   end
