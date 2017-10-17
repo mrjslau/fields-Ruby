@@ -1,0 +1,43 @@
+---
+- name: rubyspec
+  namespace: Rubyspec
+  repo_uri: 'https://github.com/ruby/rubyspec.git'
+  repo_ref: 'origin/master'
+  ruby_glob_pattern: '**/*_spec.rb'
+  mutation_coverage: false
+  mutation_generation: true
+  expected_errors:
+    "#<Parser::SyntaxError: invalid multibyte escape: /\xAA/>":
+      - language/regexp/escapes_spec.rb
+    '#<RegexpError: invalid multibyte escape: /\xAA/>':
+      - language/regexp/escapes_spec.rb
+    "#<Regexp::Scanner::PrematureEndError: Premature end of pattern at #{str}>":
+      - language/regexp/interpolation_spec.rb
+    '#<Regexp::Scanner::PrematureEndError: Premature end of pattern at \xA>':
+      - language/regexp/escapes_spec.rb
+- name: regexp_parser
+  namespace: Regexp
+  repo_uri: 'https://github.com/ammar/regexp_parser.git'
+  repo_ref: 'v0.4.3'
+  ruby_glob_pattern: '**/*.rb'
+  mutation_coverage: false
+  mutation_generation: true
+  expected_errors:
+    "Regexp::Syntax::Ruby::V233 does not implement: [escape:codepoint]":
+     - regexp_parser/test/parser/test_escapes.rb
+- name: auom
+  namespace: AUOM
+  repo_uri: 'https://github.com/mbj/auom.git'
+  repo_ref: 'origin/master'
+  ruby_glob_pattern: '**/*.rb'
+  mutation_coverage: true
+  mutation_generation: true
+  expected_errors: {}
+- name: axiom
+  namespace: Axiom
+  repo_uri: 'https://github.com/dkubb/axiom.git'
+  repo_ref: 'origin/master'
+  ruby_glob_pattern: '**/*.rb'
+  mutation_coverage: false
+  mutation_generation: true
+  expected_errors: {}
