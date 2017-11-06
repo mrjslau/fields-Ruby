@@ -5,7 +5,8 @@ describe Field do
   let(:client) { Client.new('c1510766')                       }
   let(:field)  { [Field.new('Anfield'), Field.new('Wembley')] }
 
-  describe '#is_available?' do
+=begin
+  describe '#available?' do
     context 'client inputs free day' do
       it 'informs it is available' do
         expect(field[0].available?(10, 15)).to be(true)
@@ -18,6 +19,7 @@ describe Field do
       end
     end
   end
+=end
 
   describe '#make_reservation' do
     context 'given that field is reserved at that time' do
