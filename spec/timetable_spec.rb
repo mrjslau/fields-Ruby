@@ -16,4 +16,15 @@ describe Timetable do
       end
     end
   end
+
+  describe '#book' do
+    it 'books the time if available' do
+      timetable.book(Date.new(2017,12,24), 15))
+      timetable.table['2017-12-24'][15].should_not be(nil)
+    end
+    it 'gets notified for unavailability' do
+      timetable.book(Date.new(2017,12,24), 15))
+      expect(timetable.book(Date.new(2017,12,24), 15)).to be(false)
+    end
+  end
 end
