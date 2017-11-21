@@ -2,34 +2,44 @@
 require 'spec_helper'
 
 describe Invoice do
-  let(:client)       { Client.new('s1510766')                                 }
-  let(:reservation)  { Reservation.new(Field.new('LOC', 100), client, 21, 20) }
-  let(:invoice)      { Invoice.new(reservation)                               }
+  let(:client)  { Client.new('s1510766')                                 }
+  let(:reserv)  { Reservation.new(Field.new('LOC', 25), client, 21, 20)  }
+  let(:invoice) { Invoice.new(reserv)                                    }
 
   describe '#partialy_pay' do
-    it 'makes invoice paid partialy'
+    it 'makes invoice paid partialy' do
       inv_msg = 'partial payment'
       invoice.partialy_pay(50)
       expect(invoice.status).to eql(inv_msg)
     end
 
-    it 'deduces partial amount'
+    it 'makes reservation confirmed' do
+      res_msg = 'confirmed'
       invoice.partialy_pay(50)
-      expect(invoice.amount_due).to eql(100)
+      expect(invoice.reserv.status).to eql(res_msg)
+    end
+
+    it 'deduces partial amount' do
+      invoice.partialy_pay(50)
+      expect(invoice.amount_due).to eql(25)
     end
   end
-    
+
   describe '#pay' do
-    it 'makes invoice paid' do
-      inv_msg = 'paid'
-      invoice.pay
-      expect(invoice.status).to eql(inv_msg)
+    context 'invoice just created' do
+      it 'makes invoice paid' do
+        inv_msg = 'waiting for payment'
+        expect(invoice.status).to eql(inv_msg)
+        inv_msg = 'paid'
+        invoice.pay
+        expect(invoice.status).to eql(inv_msg)
+      end
     end
 
     it 'makes reservation paid' do
-      res_msg = 'paid'
+      res_msg = 'confirmed'
       invoice.pay
-      expect(invoice.reservation.status).to eql(res_msg)
+      expect(invoice.reserv.status).to eql(res_msg)
     end
   end
 end

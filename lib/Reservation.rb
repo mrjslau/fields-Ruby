@@ -8,9 +8,10 @@ class Reservation
   def initialize(field, client, day, time, duration = 2)
     @field = field
     @client = client
-    @time_details[day] = day
-    @time_details[time] = time
-    @time_details[duration] = duration
+    @time_details = {}
+    @time_details['day'] = day
+    @time_details['time'] = time
+    @time_details['duration'] = duration
     @status = 'pending'
   end
 
@@ -24,6 +25,6 @@ class Reservation
   end
 
   def confirm
-    @status = 'paid'
+    @status = 'confirmed'
   end
 end

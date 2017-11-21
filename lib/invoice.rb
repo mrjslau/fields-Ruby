@@ -2,17 +2,23 @@
 
 # Invoice class objects are invoices for reservations, which can be paid
 class Invoice
-  attr_reader :reservation, :status, :amount
+  attr_reader :reserv, :status
+  attr_accessor :amount_due
 
-  def initialize(reservation)
-    @reservation = reservation
+  def initialize(reserv)
+    @reserv = reserv
     @status = 'waiting for payment'
-    @amount = reservation.field.price * reservation.time_details[duration]
+    @amount_due = reserv.field.price * reserv.time_details.fetch('duration')
   end
 
-  
   def pay
     @status = 'paid'
-    @reservation.confirm
+    reserv.confirm
+  end
+
+  def partialy_pay(percentage)
+    @status = 'partial payment'
+    @amount_due -= amount_due * percentage / 100
+    reserv.confirm
   end
 end

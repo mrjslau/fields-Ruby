@@ -2,10 +2,10 @@
 require 'spec_helper'
 
 describe Reservation do
-  let(:client)      { Client.new('s1510766')                 }
+  let(:client)      { Client.new('s1510766')                      }
   # let(:admin)       { Admin.new('adm161616')                 }
-  let(:field)       { Field.new('Parc des Princes')          }
-  let(:reservation) { Reservation.new(field, client, 10, 15) }
+  let(:field)       { Field.new('Parc des Princes', 250)          }
+  let(:reservation) { Reservation.new(field, client, 10, 15)      }
 
   describe '#accept' do
     context 'when admin accepts' do
@@ -30,9 +30,9 @@ describe Reservation do
   end
 
   describe 'confirm' do
-    it 'changes reservation status to paid' do
+    it 'changes reservation status to confirmed' do
       reservation.confirm
-      expect(reservation.status).to eql('paid')
+      expect(reservation.status).to eql('confirmed')
     end
   end
 end
