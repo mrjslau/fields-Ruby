@@ -2,8 +2,8 @@
 require 'spec_helper'
 
 describe Field do
-  let(:client) { Client.new('c1510766')                       }
-  let(:field)  { [Field.new('Anfield'), Field.new('Wembley')] }
+  let(:client) { Client.new('c1510766')                            }
+  let(:field)  { [Field.new('Anfield'), Field.new('Wembley', 200)] }
 
   describe '#available?' do
     context 'client inputs free day' do
@@ -58,24 +58,23 @@ describe Field do
 
       it 'delivers correct info to reservation' do
         res = field[0].make_reservation(client, 10, 12)
-        expect(res.field).to equal(field[0])
         expect(res.client).to equal(client)
         expect(res.day).to equal(10)
         expect(res.time).to equal(12)
         expect(res.field.name).to match(/Anf/)
+        expect(res.field.price).to be_nil
       end
     end
 
     context 'given that field is free at that time' do
-      it 'creates a new pending reservation' do
+      it 'creates a new pending reservation with correct info' do
         msg = 'pending'
         day = 20
         time = 15
-        field[0].make_reservation(client, day, 14)
-        newres = field[0].make_reservation(client, day, time)
-        if newres.field.eql?(field[0]) && newres.day.eql?(day) && newres.time.eql?(time)
-          expect(field[0].timetable[day][time].status).to eql(msg)
-        end
+        field[1].make_reservation(client, day, 14)
+        field[1].make_reservation(client, day, time)
+        expect(field[1].timetable[day][time].status).to eql(msg)
+        expect(field[1].timetable[day][time].field.price).to equal(200)
       end
     end
   end

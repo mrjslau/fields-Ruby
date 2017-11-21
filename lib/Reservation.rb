@@ -13,10 +13,6 @@ class Reservation
     @status = status
   end
 
-  def self.get
-    @class_instance_variable
-  end
-
   def accept(admin_id, status = 'accepted')
     @acceptor = admin_id
     @status = status
