@@ -3,28 +3,27 @@
 # Reservation class is responsible for managing reservations placed on fields
 # and assigning id's
 class Reservation
-  attr_reader :field, :client, :day, :time, :status, :acceptor
+  attr_reader :field, :client, :time_details, :status
 
-  def initialize(field, client, day, time, status = 'pending')
+  def initialize(field, client, day, time, duration = 2)
     @field = field
     @client = client
-    @day = day
-    @time = time
-    @status = status
+    @time_details[day] = day
+    @time_details[time] = time
+    @time_details[duration] = duration
+    @status = 'pending'
   end
 
-  def accept(admin_id, status = 'accepted')
-    @acceptor = admin_id
-    @status = status
+  def accept
+    @status = 'accepted'
     Invoice.new(self)
   end
 
-  def cancel(admin_id, status = 'canceled')
-    @acceptor = admin_id
-    @status = status
+  def cancel
+    @status = 'canceled'
   end
 
-  def confirm(status = 'confirmed and paid')
-    @status = status
+  def confirm
+    @status = 'paid'
   end
 end

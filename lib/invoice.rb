@@ -4,12 +4,13 @@
 class Invoice
   attr_reader :reservation, :status, :amount
 
-  def initialize(reservation, status = 'waiting for payment')
+  def initialize(reservation)
     @reservation = reservation
-    @status = status
-    @amount = reservation.field.price
+    @status = 'waiting for payment'
+    @amount = reservation.field.price * reservation.time_details[duration]
   end
 
+  
   def pay
     @status = 'paid'
     @reservation.confirm
