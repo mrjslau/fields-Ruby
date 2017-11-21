@@ -5,7 +5,6 @@ describe Field do
   let(:client) { Client.new('c1510766')                       }
   let(:field)  { [Field.new('Anfield'), Field.new('Wembley')] }
 
-=begin
   describe '#available?' do
     context 'client inputs free day' do
       it 'informs it is available' do
@@ -18,8 +17,13 @@ describe Field do
         expect(field[0].available?(10, 15)).to be(true)
       end
     end
+    context 'client inputs busy hour' do
+      it 'informs it is NOT available' do
+        field[0].make_reservation(client, 10, 12)
+        expect(field[0].available?(10, 12)).to be(false)
+      end
+    end
   end
-=end
 
   describe '#make_reservation' do
     context 'given that field is reserved at that time' do
@@ -31,19 +35,47 @@ describe Field do
       end
     end
 
+    it 'does not overwrite past reservations' do
+      day = 10
+      field[1].make_reservation(client, day, 12)
+      field[1].make_reservation(client, day, 14)
+      expect(field[1].timetable[day]).to include(12)
+    end
+
     context 'given that field is free whole day' do
-      it 'creates a new pending reservation' do
-        msg = 'pending'
-        expect(field[0].make_reservation(client, 12, 14).status).to eql(msg)
+      it 'creates a timetable for the day' do
+        day = 10
+        time = 12
+        field[0].make_reservation(client, day, time)
+
+        expect(field[0].timetable[day]).to include(time)
+      end
+
+      it 'creates a new reservation' do
+        res = field[0].make_reservation(client, 10, 12)
+        expect(res).to be_instance_of(Reservation)
+      end
+
+      it 'delivers correct info to reservation' do
+        res = field[0].make_reservation(client, 10, 12)
+        expect(res.field).to equal(field[0])
+        expect(res.client).to equal(client)
+        expect(res.day).to equal(10)
+        expect(res.time).to equal(12)
+        expect(res.field.name).to match(/Anf/)
       end
     end
 
     context 'given that field is free at that time' do
       it 'creates a new pending reservation' do
         msg = 'pending'
-        field[0].make_reservation(client, 20, 14)
-        field[0].make_reservation(client, 20, 15)
-        expect(field[0].timetable[20][15].status).to eql(msg)
+        day = 20
+        time = 15
+        field[0].make_reservation(client, day, 14)
+        newres = field[0].make_reservation(client, day, time)
+        if newres.field.eql?(field[0]) && newres.day.eql?(day) && newres.time.eql?(time)
+          expect(field[0].timetable[day][time].status).to eql(msg)
+        end
       end
     end
   end

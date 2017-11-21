@@ -5,14 +5,14 @@
 class Field
   attr_reader :name, :price, :timetable
 
-  def initialize(name, price = 40)
+  def initialize(name, price = nil)
     @name = name
     @price = price
     @timetable = []
   end
 
   def available?(day, time)
-    if !@timetable[day] || @timetable[day].key?(time) == false
+    if !timetable.at(day) || timetable.fetch(day).key?(time).equal?(false)
       true
     else
       false
@@ -22,7 +22,7 @@ class Field
   def make_reservation(client, day, time)
     return 'not available' unless available?(day, time)
 
-    @timetable[day] = Hash.new(time) unless @timetable[day]
-    @timetable[day][time] = Reservation.new(self, client, day, time)
+    timetable[day] = {} unless timetable.at(day)
+    timetable.at(day)[time] = Reservation.new(self, client, day, time)
   end
 end
