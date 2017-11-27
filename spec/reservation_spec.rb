@@ -2,10 +2,10 @@
 require 'spec_helper'
 
 describe Reservation do
-  let(:client)      { Client.new('s1510766')                      }
+  let(:client)      { Client.new('c1510766', 'mrjslau', 'foot', 'm@test.com') }
   # let(:admin)       { Admin.new('adm161616')                 }
-  let(:field)       { Field.new('Parc des Princes', 250)          }
-  let(:reservation) { Reservation.new(field, client, 10, 15)      }
+  let(:field)       { Field.new('Parc des Princes', 250)                      }
+  let(:reservation) { Reservation.new(field, client, 10, 15)                  }
 
   describe '#accept' do
     context 'when admin accepts' do

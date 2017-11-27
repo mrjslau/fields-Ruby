@@ -2,8 +2,8 @@
 require 'spec_helper'
 
 describe Field do
-  let(:client) { Client.new('c1510766')                            }
-  let(:field)  { [Field.new('Anfield'), Field.new('Wembley', 200)] }
+  let(:client) { Client.new('c1510766', 'mrjslau', 'foot', 'mar@test.com') }
+  let(:field)  { [Field.new('Anfield'), Field.new('Wembley', 200)]         }
 
   describe '#available?' do
     context 'client inputs free day' do
