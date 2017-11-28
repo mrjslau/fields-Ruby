@@ -17,4 +17,5 @@ class Admin < Client
     @credentials[:email] = cr[:email]
     @status = cl.status
   end
+
 end
