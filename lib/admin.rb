@@ -16,6 +16,16 @@ class Admin < Client
     @credentials[:password] = cr[:password]
     @credentials[:email] = cr[:email]
     @status = cl.status
+    @fields = []
   end
 
+  def register_field(name, price)
+    new_field = Field.new(name, price)
+    add_field(new_field)
+    new_field
+  end
+
+  def add_field(field)
+    fields.push(field)
+  end
 end
