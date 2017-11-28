@@ -34,9 +34,7 @@ class Client
   end
 
   def log_in(pass)
-    if validate_pass(pass)
-      @status = 'Loged'
-    end
+    @status = 'Loged' if validate_pass(pass)
   end
 
   def log_off

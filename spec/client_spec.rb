@@ -46,7 +46,7 @@ describe Client do
       it 'user stays offline' do
         expect(client.status).to eql('offline')
         pass = 'football'
-        expect { client.log_in(pass) }.to_not change{client.status}
+        expect { client.log_in(pass) }.to_not change(client, :status)
       end
     end
   end
@@ -54,13 +54,13 @@ describe Client do
   describe '#log_off' do
     it 'user status changes to offline' do
       client.log_in('foot')
-      expect { client.log_off }.to change{ client.status }
+      expect { client.log_off }.to change(client, :status)
       expect(client.status).to eql('offline')
     end
     context 'if user is offline' do
       it 'status doesnt change' do
         if client.status == 'offline'
-          expect { client.log_off }.to_not change{ client.status }
+          expect { client.log_off }.to_not change(client, :status)
         end
       end
     end

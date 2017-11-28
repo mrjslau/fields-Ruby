@@ -7,12 +7,7 @@ require 'bcrypt'
 class Admin < Client
   attr_reader :fields
 
-# def initialize(cl)
-  # cr = cl.credentials
-  # super(cr[:id], cr[:username], cr[:password], cr[:email])
-  # fields = nil
-# end
-
+  # cia galima idet dar metoda init naujam adminui
   def initialize(cl)
     cr = cl.credentials
     @credentials = {}
