@@ -43,4 +43,10 @@ class Client
   def log_off
     @status = 'offline'
   end
+
+  def convert_to_admin
+    admin = Admin.new(self)
+    @credentials = nil
+    admin
+  end
 end

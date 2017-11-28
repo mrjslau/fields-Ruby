@@ -5,8 +5,8 @@ SimpleCov.start do
   add_filter '.bundle/'
 end
 
-# require 'admin'
 require 'client'
+require 'admin'
 require 'field'
 require 'invoice'
 require 'reservation'

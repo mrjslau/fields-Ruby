@@ -50,11 +50,11 @@ describe Client do
 
   describe '#convert_to_admin' do
     it 'switches basic profile to admin' do
-      expect(client(convert_to_admin)).to be_instance_of(Admin)
+      expect(client.convert_to_admin).to be_instance_of(Admin)
     end
-    it 'destroys old profile' do
-      client(convert_to_admin)
-      expect(client).to equal(nil)
+    it 'destroys old profile information' do
+      client.convert_to_admin
+      expect(client.credentials).to equal(nil)
     end
   end
 end
