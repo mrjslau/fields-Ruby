@@ -7,9 +7,19 @@ require 'bcrypt'
 class Admin < Client
   attr_reader :fields
 
+# def initialize(cl)
+  # cr = cl.credentials
+  # super(cr[:id], cr[:username], cr[:password], cr[:email])
+  # fields = nil
+# end
+
   def initialize(cl)
     cr = cl.credentials
-    super(cr[:id], cr[:username], cr[:password], cr[:email])
-    fields = nil
+    @credentials = {}
+    @credentials[:id] = cr[:id]
+    @credentials[:username] = cr[:username]
+    @credentials[:password] = cr[:password]
+    @credentials[:email] = cr[:email]
+    @status = cl.status
   end
 end

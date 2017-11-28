@@ -6,13 +6,14 @@ require 'bcrypt'
 class Client
   attr_reader :credentials, :status
 
-  def initialize(id, username, password, email, status = 'offline')
+  def initialize(id, username, password, email)
     @credentials = {}
     @credentials[:id] = id
     @credentials[:username] = username
     @credentials[:password] = BCrypt::Password.create(password)
+    # puts @credentials[:password]
     @credentials[:email] = email
-    @status = status
+    @status = 'offline'
   end
 
   def change_email(newe)
@@ -29,14 +30,12 @@ class Client
   end
 
   def validate_pass(pass)
-    @credentials[:password] == pass
+    credentials.fetch(:password) == pass
   end
 
   def log_in(pass)
     if validate_pass(pass)
       @status = 'Loged'
-    else
-      'offline'
     end
   end
 

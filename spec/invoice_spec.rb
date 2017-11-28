@@ -3,7 +3,7 @@ require 'spec_helper'
 
 describe Invoice do
   let(:client)  { Client.new('c1510766', 'mrjslau', 'foot', 'mar@test.com') }
-  let(:reserv)  { Reservation.new(Field.new('LOC', 25), client, 21, 20)     }
+  let(:reserv)  { Reservation.new(Field.new('LOC', 450), client, 21, 20)    }
   let(:invoice) { Invoice.new(reserv)                                       }
 
   describe '#partialy_pay' do
@@ -21,7 +21,8 @@ describe Invoice do
 
     it 'deduces partial amount' do
       invoice.partialy_pay(50)
-      expect(invoice.amount_due).to eql(25)
+      exp = reserv.field.price
+      expect(invoice.amount_due).to eql(exp)
     end
   end
 
