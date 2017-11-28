@@ -7,7 +7,7 @@ class Invoice
   def initialize(reserv)
     @reserv = reserv
     @status = 'waiting for payment'
-    @amount_due = reserv.field.price * reserv.time_details.fetch('duration')
+    @amount_due = reserv.field.price * reserv.time_details.fetch(:duration)
   end
 
   def pay

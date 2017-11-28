@@ -7,6 +7,7 @@ end
 
 require 'client'
 require 'admin'
+require 'event'
 require 'field'
 require 'invoice'
 require 'reservation'

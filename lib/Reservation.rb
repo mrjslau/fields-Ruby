@@ -9,9 +9,9 @@ class Reservation
     @field = field
     @client = client
     @time_details = {}
-    @time_details['day'] = day
-    @time_details['time'] = time
-    @time_details['duration'] = duration
+    @time_details[:day] = day
+    @time_details[:time] = time
+    @time_details[:duration] = duration
     @status = 'pending'
   end
 
@@ -26,5 +26,9 @@ class Reservation
 
   def confirm
     @status = 'confirmed'
+  end
+
+  def create_event
+    Event.new(field, client, time_details)
   end
 end

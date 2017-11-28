@@ -59,8 +59,8 @@ describe Field do
       it 'delivers correct info to reservation' do
         res = field[0].make_reservation(client, 10, 12)
         expect(res.client).to equal(client)
-        expect(res.time_details['day']).to equal(10)
-        expect(res.time_details['time']).to equal(12)
+        expect(res.time_details[:day]).to equal(10)
+        expect(res.time_details[:time]).to equal(12)
         expect(res.field.name).to match(/Anf/)
         expect(res.field.price).to be_nil
       end
