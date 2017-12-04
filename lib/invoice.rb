@@ -2,8 +2,7 @@
 
 # Invoice class objects are invoices for reservations, which can be paid
 class Invoice
-  attr_reader :reserv, :status
-  attr_accessor :amount_due
+  attr_reader :reserv, :status, :amount_due
 
   def initialize(reserv)
     @reserv = reserv
