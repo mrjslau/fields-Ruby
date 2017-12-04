@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/marijuslau/Desktop/Ruby/fieldsruby/lib/client.rb": [
+      "/Users/marijuslau/Desktop/Ruby/fields-Ruby/lib/client.rb": [
         null,
         1,
         null,
@@ -52,7 +52,7 @@
         null,
         null
       ],
-      "/Users/marijuslau/Desktop/Ruby/fieldsruby/lib/admin.rb": [
+      "/Users/marijuslau/Desktop/Ruby/fields-Ruby/lib/admin.rb": [
         null,
         1,
         null,
@@ -85,7 +85,7 @@
         null,
         null
       ],
-      "/Users/marijuslau/Desktop/Ruby/fieldsruby/lib/event.rb": [
+      "/Users/marijuslau/Desktop/Ruby/fields-Ruby/lib/event.rb": [
         null,
         null,
         null,
@@ -104,7 +104,7 @@
         null,
         null
       ],
-      "/Users/marijuslau/Desktop/Ruby/fieldsruby/lib/field.rb": [
+      "/Users/marijuslau/Desktop/Ruby/fields-Ruby/lib/field.rb": [
         null,
         null,
         null,
@@ -134,7 +134,7 @@
         null,
         null
       ],
-      "/Users/marijuslau/Desktop/Ruby/fieldsruby/lib/invoice.rb": [
+      "/Users/marijuslau/Desktop/Ruby/fields-Ruby/lib/invoice.rb": [
         null,
         null,
         null,
@@ -159,7 +159,7 @@
         null,
         null
       ],
-      "/Users/marijuslau/Desktop/Ruby/fieldsruby/lib/reservation.rb": [
+      "/Users/marijuslau/Desktop/Ruby/fields-Ruby/lib/reservation.rb": [
         null,
         null,
         null,
@@ -195,7 +195,7 @@
         null,
         null
       ],
-      "/Users/marijuslau/Desktop/Ruby/fieldsruby/spec/client_spec.rb": [
+      "/Users/marijuslau/Desktop/Ruby/fields-Ruby/spec/client_spec.rb": [
         null,
         1,
         null,
@@ -282,7 +282,7 @@
         null,
         null
       ],
-      "/Users/marijuslau/Desktop/Ruby/fieldsruby/spec/field_spec.rb": [
+      "/Users/marijuslau/Desktop/Ruby/fields-Ruby/spec/field_spec.rb": [
         null,
         1,
         null,
@@ -365,7 +365,7 @@
         null,
         null
       ],
-      "/Users/marijuslau/Desktop/Ruby/fieldsruby/spec/invoice_spec.rb": [
+      "/Users/marijuslau/Desktop/Ruby/fields-Ruby/spec/invoice_spec.rb": [
         null,
         1,
         null,
@@ -413,7 +413,7 @@
         null,
         null
       ],
-      "/Users/marijuslau/Desktop/Ruby/fieldsruby/spec/reservation_spec.rb": [
+      "/Users/marijuslau/Desktop/Ruby/fields-Ruby/spec/reservation_spec.rb": [
         null,
         1,
         null,
@@ -469,6 +469,6 @@
         null
       ]
     },
-    "timestamp": 1511840367
+    "timestamp": 1512411168
   }
 }
