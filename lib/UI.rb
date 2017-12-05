@@ -15,7 +15,6 @@ require_relative 'reservation'
    name[1][:username], name[1][:pass], name[1][:email])}
 
 @fields = [Field.new('Anfield', 400), Field.new('Wembley', 200)]
-@clients_res = { 'mrjslau'=>[] }
 
 # Windows
 root = TkRoot.new { title "Home" }
@@ -131,7 +130,6 @@ def check_fields(which, operation, day, hour)
               if answ.instance_of?(Reservation)
                  newres = answ.field.name + (', '+ day.to_s + 'd.') + (
                  ', ' + hour.to_s + 'hr.')
-                 @clients_res[@current.credentials[:username]].push(newres)
                  Tk::Tile::Label.new(@myrescont,
                  :text=>newres).pack
               end
