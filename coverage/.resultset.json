@@ -1,11 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-<<<<<<< HEAD
-      "/Users/marijuslau/Desktop/Ruby/fields-Ruby/lib/client.rb": [
-=======
       "/Users/marijuslaucevicius/Desktop/Ruby/fields-Ruby/lib/client.rb": [
->>>>>>> 2f35d44514e4cde509d6302c56d16a42a957e65f
         null,
         1,
         null,
@@ -56,11 +52,7 @@
         null,
         null
       ],
-<<<<<<< HEAD
-      "/Users/marijuslau/Desktop/Ruby/fields-Ruby/lib/admin.rb": [
-=======
       "/Users/marijuslaucevicius/Desktop/Ruby/fields-Ruby/lib/admin.rb": [
->>>>>>> 2f35d44514e4cde509d6302c56d16a42a957e65f
         null,
         1,
         null,
@@ -93,11 +85,7 @@
         null,
         null
       ],
-<<<<<<< HEAD
-      "/Users/marijuslau/Desktop/Ruby/fields-Ruby/lib/event.rb": [
-=======
       "/Users/marijuslaucevicius/Desktop/Ruby/fields-Ruby/lib/event.rb": [
->>>>>>> 2f35d44514e4cde509d6302c56d16a42a957e65f
         null,
         null,
         null,
@@ -116,11 +104,7 @@
         null,
         null
       ],
-<<<<<<< HEAD
-      "/Users/marijuslau/Desktop/Ruby/fields-Ruby/lib/field.rb": [
-=======
       "/Users/marijuslaucevicius/Desktop/Ruby/fields-Ruby/lib/field.rb": [
->>>>>>> 2f35d44514e4cde509d6302c56d16a42a957e65f
         null,
         null,
         null,
@@ -150,11 +134,7 @@
         null,
         null
       ],
-<<<<<<< HEAD
-      "/Users/marijuslau/Desktop/Ruby/fields-Ruby/lib/invoice.rb": [
-=======
       "/Users/marijuslaucevicius/Desktop/Ruby/fields-Ruby/lib/invoice.rb": [
->>>>>>> 2f35d44514e4cde509d6302c56d16a42a957e65f
         null,
         null,
         null,
@@ -179,11 +159,7 @@
         null,
         null
       ],
-<<<<<<< HEAD
-      "/Users/marijuslau/Desktop/Ruby/fields-Ruby/lib/reservation.rb": [
-=======
       "/Users/marijuslaucevicius/Desktop/Ruby/fields-Ruby/lib/reservation.rb": [
->>>>>>> 2f35d44514e4cde509d6302c56d16a42a957e65f
         null,
         null,
         null,
@@ -219,11 +195,7 @@
         null,
         null
       ],
-<<<<<<< HEAD
-      "/Users/marijuslau/Desktop/Ruby/fields-Ruby/spec/client_spec.rb": [
-=======
       "/Users/marijuslaucevicius/Desktop/Ruby/fields-Ruby/spec/client_spec.rb": [
->>>>>>> 2f35d44514e4cde509d6302c56d16a42a957e65f
         null,
         1,
         null,
@@ -310,11 +282,7 @@
         null,
         null
       ],
-<<<<<<< HEAD
-      "/Users/marijuslau/Desktop/Ruby/fields-Ruby/spec/field_spec.rb": [
-=======
       "/Users/marijuslaucevicius/Desktop/Ruby/fields-Ruby/spec/field_spec.rb": [
->>>>>>> 2f35d44514e4cde509d6302c56d16a42a957e65f
         null,
         1,
         null,
@@ -397,11 +365,7 @@
         null,
         null
       ],
-<<<<<<< HEAD
-      "/Users/marijuslau/Desktop/Ruby/fields-Ruby/spec/invoice_spec.rb": [
-=======
       "/Users/marijuslaucevicius/Desktop/Ruby/fields-Ruby/spec/invoice_spec.rb": [
->>>>>>> 2f35d44514e4cde509d6302c56d16a42a957e65f
         null,
         1,
         null,
@@ -449,11 +413,7 @@
         null,
         null
       ],
-<<<<<<< HEAD
-      "/Users/marijuslau/Desktop/Ruby/fields-Ruby/spec/reservation_spec.rb": [
-=======
       "/Users/marijuslaucevicius/Desktop/Ruby/fields-Ruby/spec/reservation_spec.rb": [
->>>>>>> 2f35d44514e4cde509d6302c56d16a42a957e65f
         null,
         1,
         null,
@@ -509,10 +469,6 @@
         null
       ]
     },
-<<<<<<< HEAD
-    "timestamp": 1512411168
-=======
-    "timestamp": 1512410985
->>>>>>> 2f35d44514e4cde509d6302c56d16a42a957e65f
+    "timestamp": 1512411787
   }
 }
