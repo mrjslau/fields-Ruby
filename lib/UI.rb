@@ -10,7 +10,6 @@ require_relative 'reservation'
 # Data
 @clients = { 'mrjslau'=>Client.new('c1510766', 'mrjslau',
                                       'foot', 'mar@test.com') }
-@current
 @fields = [Field.new('Anfield', 400), Field.new('Wembley', 200)]
 
 # Windows
@@ -122,7 +121,9 @@ def check_fields(which, operation, day, hour)
               :command=>proc{answ = @fields[which].make_reservation(@current,
               day, hour);
               if answ.instance_of?(Reservation)
-                 Tk::Tile::Label.new(@myrescont, :text=>answ.field.name.concat(day.to_s).concat(hour.to_s)).pack
+                 Tk::Tile::Label.new(@myrescont,
+                 :text=>answ.field.name.concat(', '+ day.to_s + 'd.').concat(
+                 ', ' + hour.to_s + 'hr.')).pack
               end
               notif.destroy()}).pack
   else

@@ -1,0 +1,22 @@
+current directory: /Users/marijuslaucevicius/Desktop/Ruby/fields-Ruby/.bundle/ruby/2.4.0/gems/tk-0.2.0/ext/tk/tkutil
+/usr/local/opt/ruby/bin/ruby -r ./siteconf20171205-20265-n9ctcq.rb extconf.rb
+checking for rb_obj_instance_exec() in ruby.h... yes
+checking for rb_obj_untrust() in ruby.h... yes
+checking for rb_obj_taint() in ruby.h... yes
+checking for rb_sym2str() in ruby.h... yes
+checking for rb_id2str() in ruby.h... yes
+checking for rb_ary_cat() in ruby.h... yes
+checking for strndup() in string.h... yes
+creating Makefile
+
+current directory: /Users/marijuslaucevicius/Desktop/Ruby/fields-Ruby/.bundle/ruby/2.4.0/gems/tk-0.2.0/ext/tk/tkutil
+make "DESTDIR=" clean
+
+current directory: /Users/marijuslaucevicius/Desktop/Ruby/fields-Ruby/.bundle/ruby/2.4.0/gems/tk-0.2.0/ext/tk/tkutil
+make "DESTDIR="
+compiling tkutil.c
+linking shared-object tkutil.bundle
+
+current directory: /Users/marijuslaucevicius/Desktop/Ruby/fields-Ruby/.bundle/ruby/2.4.0/gems/tk-0.2.0/ext/tk/tkutil
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 tkutil.bundle ./.gem.20171205-20265-1th3qq2
