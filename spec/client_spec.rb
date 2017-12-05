@@ -1,8 +1,29 @@
 # spec/client_spec.rb
 require 'spec_helper'
+require 'rspec/expectations'
+
+RSpec::Matchers.define :be_encrypted do |expected|
+  match do |actual|
+    if actual.length > 30 && actual.match(/^$/)
+      expected = true
+    end
+    expected == true
+  end
+  failure_message do |actual|
+    "expected that pass would start with $ and be longer than 30 => #{expected}"
+  end
+end
+
 
 describe Client do
   let(:client) { Client.new('c1510766', 'mrjslau', 'foot', 'mar@test.com') }
+
+  describe '#initialize' do
+    it 'ensures users pass is encrypted' do
+      cl = Client.new('c10', 'mr', 'foo', 'mar@om')
+      expect(cl.credentials[:password]).to be_encrypted(true)
+    end
+  end
 
   describe '#change_email' do
     it 'changes email' do

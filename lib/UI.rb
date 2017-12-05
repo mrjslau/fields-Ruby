@@ -1,3 +1,4 @@
+require 'yaml'
 require 'tk'
 require 'tkextlib/tile'
 require_relative 'client'
@@ -8,12 +9,18 @@ require_relative 'invoice'
 require_relative 'reservation'
 
 # Data
-@clients = { 'mrjslau'=>Client.new('c1510766', 'mrjslau',
-                                      'foot', 'mar@test.com') }
+@clients = {}
+@clientsdata = YAML::load_file(File.join(__dir__, "clients.yml"))
+@clientsdata.each { |name| @clients[name[0]] = Client.new(name[1][:id],
+   name[1][:username], name[1][:pass], name[1][:email])}
+
 @fields = [Field.new('Anfield', 400), Field.new('Wembley', 200)]
+@clients_res = { 'mrjslau'=>[] }
 
 # Windows
 root = TkRoot.new { title "Home" }
+root.bind("Destroy") { output = YAML.dump @clientsdata
+                      File.write("clients.yml", output)}
 log_win = TkToplevel.new { title "Welcome" }
 log_win.bind("Destroy") { root.destroy() }
 
@@ -66,6 +73,7 @@ end
 
 def validate_signup(lbl1, ent1, ent2, ent3, curwin, nextwin)
   unless @clients.key?(ent1.get)
+    @clientsdata[ent1.get] = {id:"c", username: ent1.get, pass: ent2.get, email: ent3.get}
     @clients[ent1.get] = Client.new("c", ent1.get, ent2.get, ent3.get)
     @current = @clients[ent1.get]
     lbl1.foreground = 'black'
@@ -121,9 +129,11 @@ def check_fields(which, operation, day, hour)
               :command=>proc{answ = @fields[which].make_reservation(@current,
               day, hour);
               if answ.instance_of?(Reservation)
+                 newres = answ.field.name + (', '+ day.to_s + 'd.') + (
+                 ', ' + hour.to_s + 'hr.')
+                 @clients_res[@current.credentials[:username]].push(newres)
                  Tk::Tile::Label.new(@myrescont,
-                 :text=>answ.field.name.concat(', '+ day.to_s + 'd.').concat(
-                 ', ' + hour.to_s + 'hr.')).pack
+                 :text=>newres).pack
               end
               notif.destroy()}).pack
   else
