@@ -13,5 +13,3 @@ require 'field'
 require 'invoice'
 require 'reservation'
 require 'UI'
-
-test
