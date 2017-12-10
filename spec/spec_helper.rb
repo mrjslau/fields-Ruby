@@ -6,6 +6,7 @@ SimpleCov.start do
   add_filter 'UI.rb'
 end
 
+require 'loader'
 require 'client'
 require 'admin'
 require 'event'

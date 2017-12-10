@@ -1,19 +1,31 @@
 # lib/client.rb
 require 'bcrypt'
+require 'yaml'
 
 # Client class objects hold info about users, their current state,
 # client can also 'upgrade' to admin
 class Client
   attr_reader :credentials, :status
 
+  @clients_loader = Loader.new
+
   def initialize(id, username, password, email)
     @credentials = {}
     @credentials[:id] = id
     @credentials[:username] = username
     @credentials[:password] = BCrypt::Password.create(password)
-    # puts @credentials[:password]
     @credentials[:email] = email
     @status = 'offline'
+  end
+
+  @all_clients = @clients_loader.load_clients
+
+  def self.all_clients
+    @all_clients
+  end
+
+  def self.look_for_client(username)
+    @all_clients.key?(username)
   end
 
   def change_email(newe)

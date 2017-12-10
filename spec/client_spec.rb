@@ -9,11 +9,10 @@ RSpec::Matchers.define :be_encrypted do |expected|
     end
     expected == true
   end
-  failure_message do |actual|
-    "expected that pass would start with $ and be longer than 30 => #{expected}"
-  end
+  # failure_message do |actual|
+  # {}"expected that pass would start with $ and be longer than 30 => #{expected}"
+  # end
 end
-
 
 describe Client do
   let(:client) { Client.new('c1510766', 'mrjslau', 'foot', 'mar@test.com') }
