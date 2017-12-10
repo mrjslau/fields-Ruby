@@ -23,8 +23,7 @@ end
 # Windows
 root = TkRoot.new { title 'Home' }
 root.bind('Destroy') do
-  output = YAML.dump @clientsdata
-  File.write('clients.yml', output)
+  Client.save_clients
 end
 log_win = TkToplevel.new { title 'Welcome' }
 log_win.bind('Destroy') { root.destroy }
@@ -70,21 +69,21 @@ Tk::Tile::Button.new(signupcont, text: 'Submit',
   ent_up_pass, ent_up_eml, log_win, root) }).pack
 # Log/Sign Functions
 def validate_login(lbl_in_usr, lbl_in_pass, ent_in_usr, ent_in_pass, curwin, nextwin)
-  if Client.look_for_client(ent_in_usr.get) && @clients[ent_in_usr.get].validate_pass(ent_in_pass.get)
+  if Client.validate_login(ent_in_usr.get, ent_in_pass.get)
     lbl_in_usr.foreground = lbl_in_pass.foreground = 'black'
     @current = @clients[ent_in_usr.get]
     curwin.withdraw
     nextwin.deiconify
   else
-    lbl_in_usr.foreground = 'red'
-    lbl_in_pass.foreground = 'red'
+    lbl_in_usr.foreground = lbl_in_pass.foreground = 'red'
   end
 end
 
 def validate_signup(lbl_up_usr, ent_up_usr, ent_up_pass, ent_up_eml, curwin, nextwin)
-  if !@clients.key?(ent_up_usr.get)
-    @clientsdata[ent_up_usr.get] = { id: 'c', username: ent_up_usr.get, pass:  ent_up_pass.get, email: ent_up_eml.get }
-    @clients[ent_up_usr.get] = Client.new('c', ent_up_usr.get, ent_up_pass.get, ent_up_eml.get)
+  if !Client.look_for_client(ent_up_usr.get)
+    #@clientsdata[ent_up_usr.get] = { id: 'c', username: ent_up_usr.get, pass:  ent_up_pass.get, email: ent_up_eml.get }
+    #@clients[ent_up_usr.get] = Client.new('c', ent_up_usr.get, ent_up_pass.get, ent_up_eml.get)
+    Client.add_new_client(20, ent_up_usr.get, ent_up_pass.get, ent_up_eml.get)
     @current = @clients[ent_up_usr.get]
     lbl_up_usr.foreground = 'black'
     curwin.withdraw

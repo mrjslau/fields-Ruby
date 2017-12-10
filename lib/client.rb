@@ -20,16 +20,25 @@ class Client
 
   @all_clients = @clients_loader.load_clients
 
-  def self.all_clients
-    @all_clients
-  end
-
   def self.look_for_client(username)
     @all_clients.key?(username)
   end
 
-  def change_email(newe)
-    @credentials[:email] = newe
+  def self.validate_login(username, pass)
+    look_for_client(username) && @all_clients[username].validate_pass(pass)
+  end
+
+  def self.add_new_client(id, username, password, email)
+    @all_clients[username] = Client.new(id, username, password, email)
+    @clients_loader.add_clients_data(id, username, password, email)
+  end
+
+  def self.save_clients
+    @clients_loader.save_clients_data
+  end
+
+  def change_email(new_email)
+    @credentials[:email] = new_email
   end
 
   def change_password(old_pass, new_pass)
