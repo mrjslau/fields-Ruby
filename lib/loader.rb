@@ -20,11 +20,11 @@ class Loader
 
   def add_clients_data(id, username, password, email)
     @clients_data[username] = {
-       id: id,
-       username: username,
-       pass: password,
-       email: email
-     }
+      id: id,
+      username: username,
+      pass: password,
+      email: email
+    }
   end
 
   def save_clients_data

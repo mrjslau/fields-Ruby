@@ -29,8 +29,8 @@ class Client
   end
 
   def self.add_new_client(id, username, password, email)
-    @all_clients[username] = Client.new(id, username, password, email)
     @clients_loader.add_clients_data(id, username, password, email)
+    @all_clients[username] = Client.new(id, username, password, email)
   end
 
   def self.save_clients

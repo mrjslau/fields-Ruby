@@ -10,14 +10,6 @@ require_relative 'invoice'
 require_relative 'reservation'
 
 # Data
-@clients = {}
-@clientsdata = YAML.load_file(File.join(__dir__, 'clients.yml'))
-@clientsdata.each do |name|
-  @clients[name[0]] = Client.new(
-    name[1][:id], name[1][:username], name[1][:pass], name[1][:email]
-  )
-end
-
 @fields = [Field.new('Anfield', 400), Field.new('Wembley', 200)]
 
 # Windows
@@ -29,7 +21,6 @@ log_win = TkToplevel.new { title 'Welcome' }
 log_win.bind('Destroy') { root.destroy }
 
 root.withdraw
-
 # LOGIN
 # ==============================================================================
 TkGrid.columnconfigure log_win, 0, weight: 1
@@ -71,7 +62,7 @@ Tk::Tile::Button.new(signupcont, text: 'Submit',
 def validate_login(lbl_in_usr, lbl_in_pass, ent_in_usr, ent_in_pass, curwin, nextwin)
   if Client.validate_login(ent_in_usr.get, ent_in_pass.get)
     lbl_in_usr.foreground = lbl_in_pass.foreground = 'black'
-    @current = @clients[ent_in_usr.get]
+    @current = Client.look_for_client(ent_in_usr.get)
     curwin.withdraw
     nextwin.deiconify
   else
@@ -81,10 +72,7 @@ end
 
 def validate_signup(lbl_up_usr, ent_up_usr, ent_up_pass, ent_up_eml, curwin, nextwin)
   if !Client.look_for_client(ent_up_usr.get)
-    #@clientsdata[ent_up_usr.get] = { id: 'c', username: ent_up_usr.get, pass:  ent_up_pass.get, email: ent_up_eml.get }
-    #@clients[ent_up_usr.get] = Client.new('c', ent_up_usr.get, ent_up_pass.get, ent_up_eml.get)
-    Client.add_new_client(20, ent_up_usr.get, ent_up_pass.get, ent_up_eml.get)
-    @current = @clients[ent_up_usr.get]
+    @current = Client.add_new_client(20, ent_up_usr.get, ent_up_pass.get, ent_up_eml.get)
     lbl_up_usr.foreground = 'black'
     curwin.withdraw
     nextwin.deiconify
@@ -116,11 +104,6 @@ end
 Tk::Tile::Label.new(fieldscont, text: 'Available fields:').pack
 cmbx = Tk::Tile::Combobox.new(fieldscont, textvariable: 'Anfield',
           values: [@fields[0].name, @fields[1].name]).pack
-radio_value = TkVariable.new ( 0 );
-Tk::Tile::RadioButton.new(fieldscont, text: 'Check availability',
-          variable: radio_value, value: 0).pack
-Tk::Tile::RadioButton.new(fieldscont, text: 'Reserve',
-          variable: radio_value, value: 1).pack
 Tk::Tile::Label.new(fieldscont, text: 'Enter day:').pack
 entResDay = Tk::Tile::Entry.new(fieldscont).pack
 Tk::Tile::Label.new(fieldscont, text: 'Enter hour:').pack
@@ -132,7 +115,7 @@ Tk::Tile::Button.new(fieldscont, text: 'Submit',
 Tk::Tile::Label.new(@myrescont, text: 'My reservations:').pack
 
 # Home Functions ---------------------------------------------------------------
-def check_fields(which, operation, day, hour)
+def check_fields(which, day, hour)
   notif = TkToplevel.new { title 'Alert' }
   TkGrid.columnconfigure notif, 0, weight: 1
   TkGrid.rowconfigure notif, 0, weight: 1
