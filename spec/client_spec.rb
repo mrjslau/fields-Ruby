@@ -20,8 +20,6 @@ end
 describe Client do
   let(:client) { Client.new(766, 'mrjslau', 'foot', 'mar@test.com') }
 
-
-
   describe '.look_for_client' do
     context 'yml file has to be created beforehand' do
       it 'finds client by username' do
@@ -45,11 +43,25 @@ describe Client do
   end
 
   describe '.add_new_client' do
-
   end
 
   describe '.save_clients' do
-
+    it 'tells loader class to save all the clients to yaml file' do
+      cl = Client.new(20, 'save', 'save', 's@s.lt')
+      data = [
+        cl.credentials[:id],
+        cl.credentials[:username],
+        cl.credentials[:pass],
+        cl.credentials[:email]
+      ]
+      Client.add_new_client(data)
+      Client.save_clients('yaml/clients.yml')
+      saved = Loader.load_clients('../yaml/clients.yml')
+      compare = Loader.load_clients('../yaml/compare_save_clients.yml')
+      saved.each do |skey, sclient|
+        expect(sclient).to be_eql_clients(compare.fetch(skey))
+      end
+    end
   end
 
   describe '#change_email' do

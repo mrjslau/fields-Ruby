@@ -6,8 +6,8 @@ require 'yaml'
 class Loader
   @clients_data = {}
 
-  def self.load_clients
-    @clients_data = YAML.load_file(File.join(__dir__, 'clients.yml'))
+  def self.load_clients(path)
+    @clients_data = YAML.load_file(File.join(__dir__, path))
     clients = {}
     @clients_data.each do |name|
       creds = name[1]
@@ -27,8 +27,8 @@ class Loader
     }
   end
 
-  def self.save_clients_data
+  def self.save_clients_data(path)
     output = YAML.dump @clients_data
-    File.write('clients.yml', output)
+    File.write(path, output)
   end
 end

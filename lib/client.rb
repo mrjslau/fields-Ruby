@@ -16,7 +16,7 @@ class Client
     @status = 'offline'
   end
 
-  @all_clients = Loader.load_clients
+  @all_clients = Loader.load_clients('../yaml/clients.yml')
 
   def self.look_for_client(username)
     @all_clients.key?(username)
@@ -33,11 +33,11 @@ class Client
 
   def self.add_new_client(creds)
     Loader.add_clients_data(creds)
-    @all_clients[username] = Client.new(creds[0], creds[1], creds[2], creds[3])
+    @all_clients[creds[1]] = Client.new(creds[0], creds[1], creds[2], creds[3])
   end
 
-  def self.save_clients
-    Loader.save_clients_data
+  def self.save_clients(path = '../yaml/clients.yml')
+    Loader.save_clients_data(path)
   end
 
   def change_email(new_email)

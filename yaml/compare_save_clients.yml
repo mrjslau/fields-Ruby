@@ -14,8 +14,8 @@ tu:
   :username: tu
   :pass: tu
   :email: t@t.lt
-dir:
+save:
   :id: 20
-  :username: dir
-  :pass: dir
-  :email: dir@dir
+  :username: save
+  :pass: save
+  :email: s@s.lt
