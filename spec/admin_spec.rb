@@ -2,7 +2,7 @@
 require 'spec_helper'
 
 describe Admin do
-  let(:client) { Client.new('c1510766', 'mrjslau', 'foot', 'mar@test.com') }
+  let(:client) { Client.new('766', 'mrjslau', 'foot', 'mar@test.com') }
   let(:admin)  { client.convert_to_admin                                   }
   let(:field)  { [Field.new('Anfield'), Field.new('Wembley', 200)]         }
 

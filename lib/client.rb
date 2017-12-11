@@ -7,8 +7,6 @@ require 'yaml'
 class Client
   attr_reader :credentials, :status
 
-  @clients_loader = Loader.new
-
   def initialize(id, username, password, email)
     @credentials = {}
     @credentials[:id] = id
@@ -18,23 +16,28 @@ class Client
     @status = 'offline'
   end
 
-  @all_clients = @clients_loader.load_clients
+  @all_clients = Loader.load_clients
 
   def self.look_for_client(username)
     @all_clients.key?(username)
   end
 
-  def self.validate_login(username, pass)
-    look_for_client(username) && @all_clients[username].validate_pass(pass)
+  def self.get_client(username)
+    @all_clients.fetch(username) if look_for_client(username)
   end
 
-  def self.add_new_client(id, username, password, email)
-    @clients_loader.add_clients_data(id, username, password, email)
-    @all_clients[username] = Client.new(id, username, password, email)
+  def self.validate_login(username, pass)
+    look_for_client(username) &&
+      @all_clients.fetch(username).validate_pass(pass)
+  end
+
+  def self.add_new_client(creds)
+    Loader.add_clients_data(creds)
+    @all_clients[username] = Client.new(creds[0], creds[1], creds[2], creds[3])
   end
 
   def self.save_clients
-    @clients_loader.save_clients_data
+    Loader.save_clients_data
   end
 
   def change_email(new_email)

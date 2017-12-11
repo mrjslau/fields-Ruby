@@ -4,24 +4,52 @@ require 'rspec/expectations'
 
 RSpec::Matchers.define :be_encrypted do |expected|
   match do |actual|
-    if actual.length > 30 && actual.match(/^$/)
-      expected = true
-    end
+    expected = true if actual.length > 30 && actual.match(/^$/)
     expected == true
   end
-  # failure_message do |actual|
-  # {}"expected that pass would start with $ and be longer than 30 => #{expected}"
-  # end
+end
+
+RSpec::Matchers.define :be_eql_clients do |expected|
+  match do |actual|
+    expected.credentials[:id] == actual.credentials[:id] &&
+      expected.credentials[:username] == actual.credentials[:username] &&
+      expected.credentials[:email] == actual.credentials[:email]
+  end
 end
 
 describe Client do
-  let(:client) { Client.new('c1510766', 'mrjslau', 'foot', 'mar@test.com') }
+  let(:client) { Client.new(766, 'mrjslau', 'foot', 'mar@test.com') }
 
-  describe '#initialize' do
-    it 'ensures users pass is encrypted' do
-      cl = Client.new('c10', 'mr', 'foo', 'mar@om')
-      expect(cl.credentials[:password]).to be_encrypted(true)
+
+
+  describe '.look_for_client' do
+    context 'yml file has to be created beforehand' do
+      it 'finds client by username' do
+        expect(Client.look_for_client('mrjslau')).to be_eql(true)
+      end
     end
+  end
+
+  describe '.get_client' do
+    context 'yml file has to be created beforehand' do
+      it 'finds client by username' do
+        expect(Client.get_client('mrjslau')).to be_eql_clients(client)
+      end
+    end
+  end
+
+  describe '.validate_login' do
+    it 'validates log ins for uis if called' do
+      expect(Client.validate_login('mrjslau', 'foot')).to be_eql(true)
+    end
+  end
+
+  describe '.add_new_client' do
+
+  end
+
+  describe '.save_clients' do
+
   end
 
   describe '#change_email' do
@@ -96,7 +124,7 @@ describe Client do
     end
     it 'delivers current client info correctly to new profile' do
       admin = client.convert_to_admin
-      expect(admin.credentials[:id]).to eql('c1510766')
+      expect(admin.credentials[:id]).to eql(766)
       expect(admin.credentials[:username]).to eql('mrjslau')
       expect(admin.validate_pass('foot')).to equal(true)
       expect(admin.credentials[:email]).to eql('mar@test.com')
