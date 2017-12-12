@@ -6,6 +6,7 @@ describe Reservation do
   # let(:admin)       { Admin.new('adm161616')                 }
   let(:field)       { Field.new('Parc des Princes', 250)                      }
   let(:reservation) { Reservation.new(field, client, 10, 15)                  }
+  let(:diffreserv)  { Reservation.new(field, client, 14, 12, 4)               }
 
   describe '#accept' do
     context 'when admin accepts pending reservation' do
@@ -48,6 +49,13 @@ describe Reservation do
       expect(ev.host.credentials).to eql(reservation.client.credentials)
       expect(ev.details[:field]).to eql(reservation.field)
       expect(ev.details[:time_details]).to eql(day: 10, time: 15, duration: 2)
+    end
+    it 'delivers correct info' do
+      diffreserv.confirm
+      ev = diffreserv.create_event
+      expect(ev.host.credentials).to eql(diffreserv.client.credentials)
+      expect(ev.details[:field]).to eql(diffreserv.field)
+      expect(ev.details[:time_details]).to eql(day: 14, time: 12, duration: 4)
     end
   end
 end

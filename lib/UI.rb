@@ -58,7 +58,7 @@ ent_up_pass = Tk::Tile::Entry.new(signupcont).pack
 Tk::Tile::Label.new(signupcont, text: 'Enter email').pack
 ent_up_eml = Tk::Tile::Entry.new(signupcont).pack
 Tk::Tile::Button.new(signupcont, text: 'Submit', command: proc {
-  validate_signup(lbl_up_usr, ent_up_usr.get, ent_up_pass, ent_up_eml.get)
+  validate_signup(lbl_up_usr, ent_up_usr.get, ent_up_pass.get, ent_up_eml.get)
 }).pack
 # Log/Sign Functions
 def validate_login(lbl_in_usr, lbl_in_pass, value_usr, value_pass)
@@ -135,14 +135,16 @@ end
 def check_fields(which, day, hour)
   @notif.deiconify
   if @fields[which].available?(day, hour)
-    Tk::Tile::Label.new(@notifcont, text: 'Available.').pack
-    Tk::Tile::Button.new(@notifcont, text: 'Reserve?', command: proc {
+    av_lbl = Tk::Tile::Label.new(@notifcont, text: 'Available.').pack
+    res_qst = Tk::Tile::Button.new(@notifcont, text: 'Reserve?', command: proc {
       answ = @fields[which].make_reservation(@user, day, hour)
       if answ.instance_of?(Reservation)
         newres = answ.field.name + (', ' + day.to_s + 'd.') +
         (', ' + hour.to_s + 'hr.')
         Tk::Tile::Label.new(@myrescont, text: newres).pack
       end
+      av_lbl.destroy
+      res_qst.destroy
       @notif.withdraw
     }).pack
   else
