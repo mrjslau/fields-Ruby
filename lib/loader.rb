@@ -6,13 +6,17 @@ require 'yaml'
 class Loader
   @clients_data = {}
 
+  def self.clients_data
+    @clients_data
+  end
+
   def self.load_clients(path)
     @clients_data = YAML.load_file(File.join(__dir__, path))
     clients = {}
     @clients_data.each do |name|
       creds = name[1]
       clients[name[0]] = Client.new(
-        creds[:id], creds[:username], creds[:pass], creds[:email]
+        creds[:id], creds[:username], creds[:password], creds[:email]
       )
     end
     clients
@@ -22,7 +26,7 @@ class Loader
     @clients_data[creds[1]] = {
       id: creds[0],
       username: creds[1],
-      pass: creds[2],
+      password: creds[2],
       email: creds[3]
     }
   end

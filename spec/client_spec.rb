@@ -18,7 +18,8 @@ RSpec::Matchers.define :be_eql_clients do |expected|
 end
 
 describe Client do
-  let(:client) { Client.new(766, 'mrjslau', 'foot', 'mar@test.com') }
+  let(:client)  { Client.new(766, 'mrjslau', 'foot', 'mar@test.com') }
+  let(:cl_data) { [30, 's', 's', 's@s.lt'] }
 
   describe '.look_for_client' do
     context 'yml file has to be created beforehand' do
@@ -37,23 +38,14 @@ describe Client do
   end
 
   describe '.validate_login' do
-    it 'validates log ins for uis if called' do
+    it 'validates log ins for ui`s if called' do
       expect(Client.validate_login('mrjslau', 'foot')).to be_eql(true)
     end
   end
 
-  describe '.add_new_client' do
-  end
-
   describe '.save_clients' do
     it 'tells loader class to save all the clients to yaml file' do
-      cl = Client.new(20, 'save', 'save', 's@s.lt')
-      data = [
-        cl.credentials[:id],
-        cl.credentials[:username],
-        cl.credentials[:pass],
-        cl.credentials[:email]
-      ]
+      data = [20, 'save', 'save', 'sv@sv.lt']
       Client.add_new_client(data)
       Client.save_clients('yaml/clients.yml')
       saved = Loader.load_clients('../yaml/clients.yml')
@@ -61,6 +53,25 @@ describe Client do
       saved.each do |skey, sclient|
         expect(sclient).to be_eql_clients(compare.fetch(skey))
       end
+    end
+  end
+
+  describe '.add_new_client' do
+    it 'adds new client to the saveable data' do
+      save_client = Client.new(cl_data[0], cl_data[1], cl_data[2], cl_data[3])
+      Client.add_new_client(cl_data)
+      comp = { id: 30, username: 's', password: 's', email: 's@s.lt' }
+      expect(
+        Loader.clients_data.fetch(save_client.credentials[:username])
+      ).to be_eql(comp)
+    end
+    it 'creates new client object' do
+      array = [30, 's', 'ss', 's@s.lt']
+      Client.add_new_client(array)
+      expect(
+        Client.get_client('s')
+      ).to be_eql_clients(Client.new(30, 's', 'ss', 's@s.lt'))
+      expect(Client.validate_login('s', 'ss')).to be(true)
     end
   end
 

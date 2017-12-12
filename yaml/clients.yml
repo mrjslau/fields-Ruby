@@ -2,20 +2,20 @@
 mrjslau:
   :id: 766
   :username: mrjslau
-  :pass: foot
+  :password: foot
   :email: mar@test.com
 as:
   :id: 12
   :username: as
-  :pass: as
+  :password: as
   :email: a@a.lt
 tu:
   :id: 13
   :username: tu
-  :pass: tu
+  :password: tu
   :email: t@t.lt
 save:
   :id: 20
   :username: save
-  :pass: 
-  :email: s@s.lt
+  :password: save
+  :email: sv@sv.lt

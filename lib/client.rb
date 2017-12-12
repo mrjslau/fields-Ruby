@@ -27,13 +27,14 @@ class Client
   end
 
   def self.validate_login(username, pass)
-    look_for_client(username) &&
-      @all_clients.fetch(username).validate_pass(pass)
+    @all_clients.fetch(username).validate_pass(pass) if look_for_client(username)
   end
 
   def self.add_new_client(creds)
     Loader.add_clients_data(creds)
-    @all_clients[creds[1]] = Client.new(creds[0], creds[1], creds[2], creds[3])
+    @all_clients[creds.fetch(1)] = new(
+      creds.fetch(0), creds.fetch(1), creds.fetch(2), creds.fetch(3)
+    )
   end
 
   def self.save_clients(path = '../yaml/clients.yml')
