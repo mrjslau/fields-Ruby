@@ -148,7 +148,12 @@ def check_fields(which, day, hour)
       @notif.withdraw
     }).pack
   else
-    Tk::Tile::Label.new(@notifcont, text: 'Unavailable.').pack
+    unv_lbl = Tk::Tile::Label.new(@notifcont, text: 'Unavailable.').pack
+    qt_qst = Tk::Tile::Button.new(@notifcont, text: 'Go Back', command: proc {
+      unv_lbl.destroy
+      qt_qst.destroy
+      @notif.withdraw
+    }).pack
   end
 end
 # ==============================================================================
