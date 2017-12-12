@@ -22,13 +22,8 @@ class Loader
     clients
   end
 
-  def self.add_clients_data(creds)
-    @clients_data[creds[1]] = {
-      id: creds[0],
-      username: creds[1],
-      password: creds[2],
-      email: creds[3]
-    }
+  def self.add_clients_data(username, creds)
+    @clients_data[username] = creds
   end
 
   def self.save_clients_data(path)

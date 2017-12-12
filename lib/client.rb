@@ -26,14 +26,15 @@ class Client
     @all_clients.fetch(username) if look_for_client(username)
   end
 
-  def self.validate_login(username, pass)
-    @all_clients.fetch(username).validate_pass(pass) if look_for_client(username)
+  def self.validate_login(usrname, pass)
+    @all_clients.fetch(usrname).validate_pass(pass) if look_for_client(usrname)
   end
 
-  def self.add_new_client(creds)
-    Loader.add_clients_data(creds)
-    @all_clients[creds.fetch(1)] = new(
-      creds.fetch(0), creds.fetch(1), creds.fetch(2), creds.fetch(3)
+  def self.add_new_client(username, creds)
+    Loader.add_clients_data(username, creds)
+    @all_clients[username] = new(
+      creds.fetch(:id), creds.fetch(:username),
+      creds.fetch(:password), creds.fetch(:email)
     )
   end
 

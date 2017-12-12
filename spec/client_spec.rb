@@ -21,6 +21,11 @@ describe Client do
   let(:client)  { Client.new(766, 'mrjslau', 'foot', 'mar@test.com') }
   let(:cl_data) { [30, 's', 's', 's@s.lt'] }
 
+  it 'ensures users passwords are protected' do
+    expect(client.credentials[:password]).not_to eql('foot')
+    expect(client.credentials[:password]).to be_encrypted(true)
+  end
+
   describe '.look_for_client' do
     context 'yml file has to be created beforehand' do
       it 'finds client by username' do
@@ -31,8 +36,11 @@ describe Client do
 
   describe '.get_client' do
     context 'yml file has to be created beforehand' do
-      it 'finds client by username' do
+      it 'finds client by username if he exists' do
         expect(Client.get_client('mrjslau')).to be_eql_clients(client)
+      end
+      it 'returns nil if username doesn`t exist' do
+        expect(Client.get_client('not valid')).to be(nil)
       end
     end
   end
@@ -41,37 +49,42 @@ describe Client do
     it 'validates log ins for ui`s if called' do
       expect(Client.validate_login('mrjslau', 'foot')).to be_eql(true)
     end
+    it 'returns nil if username and pass are not valid' do
+      expect(Client.validate_login('not valid', 'not valid')).to be(nil)
+    end
   end
 
   describe '.save_clients' do
     it 'tells loader class to save all the clients to yaml file' do
-      data = [20, 'save', 'save', 'sv@sv.lt']
-      Client.add_new_client(data)
+      data = { id: 20, username: 'save', password: 'save', email: 'sv@sv.lt' }
+      Client.add_new_client(data[:username], data)
       Client.save_clients('yaml/clients.yml')
       saved = Loader.load_clients('../yaml/clients.yml')
       compare = Loader.load_clients('../yaml/compare_save_clients.yml')
       saved.each do |skey, sclient|
         expect(sclient).to be_eql_clients(compare.fetch(skey))
       end
+      Loader.clients_data.delete('save')
+      Loader.save_clients_data('yaml/clients.yml')
     end
   end
 
   describe '.add_new_client' do
     it 'adds new client to the saveable data' do
       save_client = Client.new(cl_data[0], cl_data[1], cl_data[2], cl_data[3])
-      Client.add_new_client(cl_data)
       comp = { id: 30, username: 's', password: 's', email: 's@s.lt' }
+      Client.add_new_client(comp[:username], comp)
       expect(
         Loader.clients_data.fetch(save_client.credentials[:username])
       ).to be_eql(comp)
     end
     it 'creates new client object' do
-      array = [30, 's', 'ss', 's@s.lt']
-      Client.add_new_client(array)
+      comp = { id: 30, username: 'ss', password: 'ss', email: 'ss@ss.lt' }
+      Client.add_new_client(comp[:username], comp)
       expect(
-        Client.get_client('s')
-      ).to be_eql_clients(Client.new(30, 's', 'ss', 's@s.lt'))
-      expect(Client.validate_login('s', 'ss')).to be(true)
+        Client.get_client('ss')
+      ).to be_eql_clients(Client.new(30, 'ss', 'ss', 'ss@ss.lt'))
+      expect(Client.validate_login('ss', 'ss')).to be(true)
     end
   end
 

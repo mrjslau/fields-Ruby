@@ -14,8 +14,3 @@ tu:
   :username: tu
   :password: tu
   :email: t@t.lt
-save:
-  :id: 20
-  :username: save
-  :password: save
-  :email: sv@sv.lt

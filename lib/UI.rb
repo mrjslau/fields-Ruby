@@ -48,7 +48,7 @@ ent_in_usr.focus
 lbl_in_pass = Tk::Tile::Label.new(logincont, text: 'Enter your password').pack
 ent_in_pass = Tk::Tile::Entry.new(logincont).pack
 Tk::Tile::Button.new(logincont, text: 'Submit', command: proc {
-  validate_login(lbl_in_usr, lbl_in_pass, ent_in_usr, ent_in_pass)
+  validate_login(lbl_in_usr, lbl_in_pass, ent_in_usr.get, ent_in_pass.get)
 }).pack
 # Signupcont widgets -----------------------------------------------------------
 lbl_up_usr = Tk::Tile::Label.new(signupcont, text: 'Enter username').pack
@@ -58,12 +58,12 @@ ent_up_pass = Tk::Tile::Entry.new(signupcont).pack
 Tk::Tile::Label.new(signupcont, text: 'Enter email').pack
 ent_up_eml = Tk::Tile::Entry.new(signupcont).pack
 Tk::Tile::Button.new(signupcont, text: 'Submit', command: proc {
-  validate_signup(lbl_up_usr, ent_up_usr, ent_up_pass, ent_up_eml)
+  validate_signup(lbl_up_usr, ent_up_usr.get, ent_up_pass, ent_up_eml.get)
 }).pack
 # Log/Sign Functions
-def validate_login(lbl_in_usr, lbl_in_pass, ent_in_usr, ent_in_pass)
-  if Client.validate_login(ent_in_usr.get, ent_in_pass.get)
-    @user = Client.get_client(ent_in_usr.get)
+def validate_login(lbl_in_usr, lbl_in_pass, value_usr, value_pass)
+  if Client.validate_login(value_usr, value_pass)
+    @user = Client.get_client(value_usr)
     @log_win.withdraw
     @root.deiconify
   else
@@ -71,10 +71,12 @@ def validate_login(lbl_in_usr, lbl_in_pass, ent_in_usr, ent_in_pass)
   end
 end
 
-def validate_signup(lbl_up_usr, ent_up_usr, ent_up_pass, ent_up_eml)
-  if !Client.look_for_client(ent_up_usr.get)
-    credentials = [20, ent_up_usr.get, ent_up_pass.get, ent_up_eml.get]
-    @user = Client.add_new_client(credentials)
+def validate_signup(lbl_up_usr, value_usr, value_pass, value_eml)
+  if !Client.look_for_client(value_usr)
+    credentials = {
+      id: 20, username: value_usr, password: value_pass, email: value_eml
+    }
+    @user = Client.add_new_client(credentials[:username], credentials)
     @log_win.withdraw
     @root.deiconify
   else
@@ -141,7 +143,7 @@ def check_fields(which, day, hour)
         (', ' + hour.to_s + 'hr.')
         Tk::Tile::Label.new(@myrescont, text: newres).pack
       end
-      @notif.destroy
+      @notif.withdraw
     }).pack
   else
     Tk::Tile::Label.new(@notifcont, text: 'Unavailable.').pack
