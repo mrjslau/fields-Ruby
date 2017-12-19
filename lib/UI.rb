@@ -15,7 +15,7 @@ require_relative 'reservation'
 # Windows
 @root = TkRoot.new { title 'Home' }
 @root.bind('Destroy') do
-  Client.save_clients
+  Client.save_clients('../yaml/clients.yml')
 end
 @log_win = TkToplevel.new { title 'Welcome' }
 @log_win.bind('Destroy') { @root.destroy }

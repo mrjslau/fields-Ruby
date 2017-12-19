@@ -38,7 +38,7 @@ class Client
     )
   end
 
-  def self.save_clients(path = '../yaml/clients.yml')
+  def self.save_clients(path)
     Loader.save_clients_data(path)
   end
 

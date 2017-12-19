@@ -61,8 +61,8 @@ describe Client do
       Client.save_clients('yaml/clients.yml')
       saved = Loader.load_clients('../yaml/clients.yml')
       compare = Loader.load_clients('../yaml/compare_save_clients.yml')
-      saved.each do |skey, sclient|
-        expect(sclient).to be_eql_clients(compare.fetch(skey))
+      compare.each do |skey, sclient|
+        expect(sclient).to be_eql_clients(saved.fetch(skey))
       end
       Loader.clients_data.delete('save')
       Loader.save_clients_data('yaml/clients.yml')
